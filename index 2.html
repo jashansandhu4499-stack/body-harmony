@@ -1,0 +1,1921 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BMI — Body Harmony Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ══════════════════════════════════════════
+   DESIGN SYSTEM — Body Harmony Index
+   Aesthetic: Organic Wellness / Editorial Light
+   Fonts: Playfair Display + Outfit
+   ══════════════════════════════════════════ */
+
+:root {
+  --cream: #faf7f2;
+  --cream-dark: #f0ebe0;
+  --cream-mid: #e8e0d0;
+  --parchment: #d4c9b0;
+  --stone: #9e9080;
+  --stone-dark: #6b6058;
+  --ink: #1e1a14;
+  --ink-soft: #3d3528;
+  --ink-muted: #7a7060;
+
+  --sage: #6b8f6e;
+  --sage-light: #e8f0e8;
+  --terracotta: #c9704a;
+  --terracotta-light: #faeee8;
+  --amber: #c9952a;
+  --amber-light: #fdf4e0;
+  --rose: #c45c6a;
+  --rose-light: #fde8eb;
+  --sky: #4a7fa5;
+  --sky-light: #e4eff7;
+
+  --card-bg: #ffffff;
+  --card-border: rgba(180,165,140,0.25);
+  --card-shadow: 0 2px 20px rgba(100,85,60,0.08), 0 1px 4px rgba(100,85,60,0.06);
+  --card-shadow-hover: 0 8px 40px rgba(100,85,60,0.14), 0 2px 8px rgba(100,85,60,0.08);
+
+  --radius-xl: 24px;
+  --radius-lg: 18px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --radius-pill: 999px;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Outfit', sans-serif;
+
+  --transition: 0.28s cubic-bezier(0.4,0,0.2,1);
+  --spring: 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+[data-theme="dark"] {
+  --cream: #13110d;
+  --cream-dark: #1c1914;
+  --cream-mid: #252017;
+  --parchment: #3a342a;
+  --stone: #7a7060;
+  --stone-dark: #a09585;
+  --ink: #f0ebe0;
+  --ink-soft: #d4c9b0;
+  --ink-muted: #9e9080;
+
+  --sage: #7aab7e;
+  --sage-light: #1a2e1b;
+  --terracotta: #e0845c;
+  --terracotta-light: #2e1a10;
+  --amber: #e0ab3c;
+  --amber-light: #2e2410;
+  --rose: #e07080;
+  --rose-light: #2e1015;
+  --sky: #60a0cc;
+  --sky-light: #0e1e2e;
+
+  --card-bg: #1c1914;
+  --card-border: rgba(80,70,55,0.4);
+  --card-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  --card-shadow-hover: 0 8px 40px rgba(0,0,0,0.45);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+  position: relative;
+}
+
+/* ── Decorative background ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(107,143,110,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 80%, rgba(201,112,74,0.07) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 80% 10%, rgba(201,149,42,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity var(--transition);
+}
+
+[data-theme="dark"] body::before { opacity: 0.5; }
+
+/* ── Grain texture overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ══════════ LAYOUT ══════════ */
+.page-wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
+}
+
+/* ══════════ HEADER ══════════ */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 0 0;
+  margin-bottom: 48px;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--ink);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.logo-icon svg { display: block; }
+
+.logo-text {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.logo-text span {
+  display: block;
+  font-size: 0.6rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-top: 1px;
+}
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+
+/* Theme toggle */
+.theme-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+  color: var(--ink-muted);
+  font-size: 1.1rem;
+  box-shadow: var(--card-shadow);
+}
+
+.theme-btn:hover {
+  border-color: var(--parchment);
+  transform: rotate(15deg) scale(1.05);
+  box-shadow: var(--card-shadow-hover);
+}
+
+.icon-sun, .icon-moon { position: absolute; transition: all var(--transition); }
+.theme-btn { position: relative; overflow: hidden; }
+
+[data-theme="light"] .icon-moon { opacity:0; transform:scale(0.4) rotate(40deg); }
+[data-theme="light"] .icon-sun  { opacity:1; transform:scale(1) rotate(0deg); }
+[data-theme="dark"]  .icon-sun  { opacity:0; transform:scale(0.4) rotate(-40deg); }
+[data-theme="dark"]  .icon-moon { opacity:1; transform:scale(1) rotate(0deg); }
+
+/* ══════════ HERO ══════════ */
+.hero {
+  text-align: center;
+  margin-bottom: 52px;
+  animation: heroReveal 0.8s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes heroReveal {
+  from { opacity:0; transform: translateY(24px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  background: var(--terracotta-light);
+  border: 1px solid rgba(201,112,74,0.2);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 20px;
+  transition: all var(--transition);
+}
+
+.hero-kicker::before { content: '◆'; font-size: 0.5em; }
+
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.hero-h1 em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.hero-sub {
+  font-size: 1rem;
+  color: var(--ink-muted);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  max-width: 460px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ══════════ CARDS ══════════ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  transition: box-shadow var(--transition), border-color var(--transition), background var(--transition);
+}
+
+.card:hover { box-shadow: var(--card-shadow-hover); }
+
+/* ══════════ MAIN GRID ══════════ */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+  animation: gridReveal 0.8s 0.15s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes gridReveal {
+  from { opacity:0; transform: translateY(20px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+/* ══════════ INPUT CARD ══════════ */
+.input-card { padding: 32px; }
+
+.input-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.input-card-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.input-card-title small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+  margin-top: 3px;
+}
+
+/* Live toggle */
+.live-toggle {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.live-toggle input { display: none; }
+
+.live-pill {
+  width: 38px;
+  height: 22px;
+  border-radius: 11px;
+  background: var(--cream-mid);
+  border: 1.5px solid var(--cream-mid);
+  position: relative;
+  transition: all var(--transition);
+}
+
+.live-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--stone);
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.live-toggle input:checked + .live-pill { background: var(--sage); border-color: var(--sage); }
+.live-toggle input:checked + .live-pill .live-dot { transform: translateX(16px); background: #fff; }
+
+.live-label {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* ── Field groups ── */
+.field-group { margin-bottom: 22px; }
+
+.field-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.field-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone-dark);
+  transition: color var(--transition);
+}
+
+/* Unit switcher */
+.unit-switch {
+  display: flex;
+  background: var(--cream-dark);
+  border-radius: var(--radius-sm);
+  padding: 2px;
+  gap: 2px;
+}
+
+.unit-opt {
+  padding: 4px 11px;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: none;
+  background: transparent;
+  color: var(--stone);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.unit-opt.active {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+[data-theme="dark"] .unit-opt.active { background: var(--ink-soft); color: var(--cream); }
+
+/* Input fields */
+.inputs-row { display: flex; gap: 10px; }
+.inputs-row.hidden { display: none; }
+
+.inp-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.inp-wrap input {
+  width: 100%;
+  padding: 13px 46px 13px 16px;
+  background: var(--cream-dark);
+  border: 1.5px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+  outline: none;
+  transition: all var(--transition);
+  -moz-appearance: textfield;
+}
+
+.inp-wrap input::-webkit-inner-spin-button,
+.inp-wrap input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+.inp-wrap input::placeholder { color: var(--stone); }
+
+.inp-wrap input:focus {
+  background: var(--card-bg);
+  border-color: var(--terracotta);
+  box-shadow: 0 0 0 3px rgba(201,112,74,0.12);
+}
+
+.inp-wrap input.err {
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(196,92,106,0.12);
+}
+
+.inp-unit {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--stone);
+  pointer-events: none;
+  text-transform: lowercase;
+}
+
+.field-error {
+  font-size: 0.7rem;
+  color: var(--rose);
+  margin-top: 6px;
+  min-height: 14px;
+  font-weight: 400;
+  transition: opacity var(--transition);
+}
+
+/* Gender selector */
+.gender-row { display: flex; gap: 8px; }
+
+.gender-opt {
+  flex: 1;
+  padding: 10px 0;
+  border: 1.5px solid var(--cream-mid);
+  background: var(--cream-dark);
+  color: var(--stone-dark);
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  text-align: center;
+}
+
+.gender-opt:hover { border-color: var(--parchment); }
+
+.gender-opt.active {
+  border-color: var(--terracotta);
+  background: var(--terracotta-light);
+  color: var(--terracotta);
+}
+
+/* ── Action row ── */
+.action-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.calc-btn {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  padding: 14px 24px;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.calc-btn:hover {
+  background: var(--ink-soft);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(30,26,20,0.25);
+}
+
+.calc-btn:active { transform: translateY(0); }
+
+/* Ripple */
+.calc-btn .ripple-ring {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  width: 0; height: 0;
+  transform: translate(-50%,-50%);
+  animation: rippleAnim 0.55s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes rippleAnim {
+  to { width:400px; height:400px; opacity:0; }
+}
+
+.calc-btn-arrow {
+  font-size: 1rem;
+  transition: transform var(--transition);
+}
+
+.calc-btn:hover .calc-btn-arrow { transform: translateX(3px); }
+
+.reset-btn {
+  width: 48px;
+  height: 48px;
+  border: 1.5px solid var(--card-border);
+  background: var(--cream-dark);
+  color: var(--stone);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all var(--transition);
+  font-size: 1rem;
+}
+
+.reset-btn:hover {
+  border-color: var(--rose);
+  color: var(--rose);
+  background: var(--rose-light);
+  transform: rotate(-90deg);
+}
+
+/* ══════════ RESULT CARD ══════════ */
+.result-card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  min-height: 440px;
+}
+
+/* Empty state */
+.result-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-art {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: var(--cream-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 4px;
+}
+
+.empty-headline {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--stone-dark);
+}
+
+.empty-sub {
+  font-size: 0.8rem;
+  color: var(--stone);
+  line-height: 1.55;
+  max-width: 200px;
+}
+
+/* Result filled */
+.result-filled {
+  display: none;
+  flex-direction: column;
+  gap: 22px;
+  animation: resultReveal 0.5s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.result-filled.visible { display: flex; }
+
+@keyframes resultReveal {
+  from { opacity:0; transform: scale(0.97) translateY(10px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+
+/* BMI display */
+.bmi-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bmi-left {}
+
+.bmi-eyebrow {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 8px;
+}
+
+.bmi-number {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 4.2rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  margin-bottom: 10px;
+  transition: color 0.5s ease;
+}
+
+.bmi-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.4s ease;
+}
+
+.bmi-right { text-align: right; }
+
+.ideal-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone);
+  margin-bottom: 6px;
+}
+
+.ideal-range {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.ideal-unit {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: var(--stone);
+  margin-top: 2px;
+}
+
+/* Category colors */
+.c-under  { color: var(--sky); }
+.c-normal { color: var(--sage); }
+.c-over   { color: var(--amber); }
+.c-obese  { color: var(--terracotta); }
+.c-e-obese{ color: var(--rose); }
+
+.badge-under  { background: var(--sky-light);        color: var(--sky); }
+.badge-normal { background: var(--sage-light);       color: var(--sage); }
+.badge-over   { background: var(--amber-light);      color: var(--amber); }
+.badge-obese  { background: var(--terracotta-light); color: var(--terracotta); }
+.badge-e-obese{ background: var(--rose-light);       color: var(--rose); }
+
+/* ── BMI Scale ── */
+.scale-wrap { position: relative; }
+
+.scale-track {
+  height: 12px;
+  border-radius: 6px;
+  display: flex;
+  overflow: visible;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.scale-seg {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  cursor: help;
+  transition: filter 0.2s;
+}
+
+.scale-seg:first-child { border-radius: 6px 0 0 6px; }
+.scale-seg:last-child  { border-radius: 0 6px 6px 0; }
+.scale-seg:hover { filter: brightness(1.15) saturate(1.2); }
+
+.scale-seg.s-under  { background: linear-gradient(to right, var(--sky), #7ab5d8); }
+.scale-seg.s-normal { background: linear-gradient(to right, #7ab5d8, var(--sage)); }
+.scale-seg.s-over   { background: linear-gradient(to right, var(--sage), var(--amber)); }
+.scale-seg.s-obese  { background: linear-gradient(to right, var(--amber), var(--terracotta)); }
+.scale-seg.s-eobese { background: linear-gradient(to right, var(--terracotta), var(--rose)); }
+
+/* Tooltip */
+.scale-seg::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 0.65rem;
+  font-weight: 500;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s;
+  z-index: 10;
+}
+
+.scale-seg::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--ink);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s;
+  z-index: 10;
+}
+
+.scale-seg:hover::after,
+.scale-seg:hover::before { opacity: 1; }
+
+/* Scale pointer */
+.scale-pointer {
+  position: absolute;
+  top: -7px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 3px solid var(--ink);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  transform: translateX(-50%);
+  left: 0;
+  transition: left 0.9s cubic-bezier(0.34,1.56,0.64,1), border-color 0.5s ease;
+  z-index: 5;
+}
+
+.scale-pointer::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: var(--ink);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: background 0.5s ease;
+}
+
+.scale-nums {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: var(--stone);
+  padding: 0 0 4px;
+}
+
+.scale-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-top: 8px;
+}
+
+.leg-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.65rem;
+  color: var(--stone-dark);
+}
+
+.leg-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Health tips ── */
+.tips-card {
+  background: var(--cream-dark);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  border: 1px solid var(--card-border);
+}
+
+.tips-head {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stone-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.tips-head::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--terracotta);
+  flex-shrink: 0;
+}
+
+.tips-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+
+.tips-list li {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-muted);
+  padding-left: 14px;
+  position: relative;
+}
+
+.tips-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--terracotta);
+  font-size: 0.75rem;
+  top: 1px;
+}
+
+/* Share btn */
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: 1.5px solid var(--card-border);
+  background: transparent;
+  color: var(--stone-dark);
+  font-family: var(--font-body);
+  font-size: 0.77rem;
+  font-weight: 500;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition);
+  align-self: flex-start;
+}
+
+.share-btn:hover {
+  border-color: var(--sage);
+  color: var(--sage);
+  background: var(--sage-light);
+}
+
+/* ══════════ HISTORY SECTION ══════════ */
+.history-section {
+  animation: gridReveal 0.8s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+.section-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--terracotta);
+}
+
+.clear-btn {
+  padding: 7px 16px;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--stone);
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.clear-btn:hover { border-color: var(--rose); color: var(--rose); background: var(--rose-light); }
+
+/* History grid */
+.history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.hist-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  transition: all var(--transition);
+  animation: histItemIn 0.35s cubic-bezier(0.16,1,0.3,1) both;
+  cursor: default;
+}
+
+@keyframes histItemIn {
+  from { opacity:0; transform: scale(0.95) translateY(8px); }
+  to   { opacity:1; transform: scale(1) translateY(0); }
+}
+
+.hist-item:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+
+.hist-date {
+  font-size: 0.64rem;
+  color: var(--stone);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+.hist-bmi {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.hist-cat {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Chart card */
+.chart-card {
+  padding: 24px 24px 20px;
+  margin-bottom: 16px;
+}
+
+.chart-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.chart-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone-dark);
+}
+
+.chart-sub {
+  font-size: 0.65rem;
+  color: var(--stone);
+  margin-top: 2px;
+}
+
+#bmiChart { width: 100%; display: block; }
+
+/* Empty history */
+.history-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--stone);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.history-empty strong {
+  display: block;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--stone-dark);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+/* ══════════ TOAST ══════════ */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  background: var(--ink);
+  color: var(--cream);
+  padding: 12px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 0.82rem;
+  font-weight: 500;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(12px) scale(0.96);
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+  pointer-events: none;
+  max-width: 280px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.toast.show { opacity:1; transform:translateY(0) scale(1); }
+
+/* ══════════ VOICE BTN ══════════ */
+.voice-btn {
+  width: 44px; height: 44px;
+  border: 1.5px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--stone);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  transition: all var(--transition);
+  box-shadow: var(--card-shadow);
+  flex-shrink: 0;
+}
+
+.voice-btn:hover { border-color: var(--sage); color: var(--sage); background: var(--sage-light); }
+.voice-btn.listening { border-color: var(--rose); color: var(--rose); background: var(--rose-light); animation: pulse 1s infinite; }
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(196,92,106,0.3); }
+  50%      { box-shadow: 0 0 0 8px rgba(196,92,106,0); }
+}
+
+/* ══════════ RESPONSIVE ══════════ */
+@media (max-width: 700px) {
+  .site-header { margin-bottom: 32px; }
+  .hero        { margin-bottom: 36px; }
+  .hero-h1     { font-size: 2rem; }
+
+  .main-grid { grid-template-columns: 1fr; }
+
+  .input-card, .result-card { padding: 22px; }
+  .result-card { min-height: auto; }
+
+  .bmi-display { flex-direction: column; gap: 12px; }
+  .bmi-right   { text-align: left; }
+
+  .history-grid { grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); }
+  .toast { bottom: 16px; right: 16px; }
+}
+
+@media (max-width: 420px) {
+  .hero-h1 { font-size: 1.75rem; }
+  .inputs-row { flex-direction: column; }
+  .scale-legend { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="page-wrap">
+
+  <!-- ══ HEADER ══ -->
+  <header class="site-header">
+    <div class="logo-mark">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 3C11 3 7 7 7 11.5C7 14.5376 8.79086 17 11 17C13.2091 17 15 14.5376 15 11.5C15 7 11 3 11 3Z" fill="#f0ebe0"/>
+          <path d="M8 13.5C8.5 14.5 9.5 15 11 15" stroke="#f0ebe0" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        Body Harmony
+        <span>Wellness Index</span>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode">
+        <span class="icon-sun">☀</span>
+        <span class="icon-moon">☽</span>
+      </button>
+      <button class="voice-btn" id="voiceBtn" title="Voice input (say: height 175 weight 70)">🎙</button>
+    </div>
+  </header>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <div class="hero-kicker">Personalised Health Analysis</div>
+    <h1 class="hero-h1">Know your body,<br/><em>find your balance</em></h1>
+    <p class="hero-sub">Instant BMI analysis with personalized wellness insights, trend tracking, and science-backed guidance.</p>
+  </section>
+
+  <!-- ══ MAIN GRID ══ -->
+  <div class="main-grid">
+
+    <!-- INPUT CARD -->
+    <div class="card input-card">
+      <div class="input-card-header">
+        <div class="input-card-title">
+          Your Measurements
+          <small>Enter details below to calculate</small>
+        </div>
+        <label class="live-toggle" title="Calculate as you type">
+          <input type="checkbox" id="liveToggle"/>
+          <div class="live-pill"><div class="live-dot"></div></div>
+          <span class="live-label">Live</span>
+        </label>
+      </div>
+
+      <!-- HEIGHT -->
+      <div class="field-group">
+        <div class="field-row">
+          <span class="field-label">Height</span>
+          <div class="unit-switch" id="hUnitSwitch">
+            <button class="unit-opt active" data-u="cm">cm</button>
+            <button class="unit-opt" data-u="ft">ft / in</button>
+          </div>
+        </div>
+        <div class="inputs-row" id="hCmRow">
+          <div class="inp-wrap">
+            <input type="number" id="hCm" placeholder="175" min="50" max="280"/>
+            <span class="inp-unit">cm</span>
+          </div>
+        </div>
+        <div class="inputs-row hidden" id="hFtRow">
+          <div class="inp-wrap">
+            <input type="number" id="hFt" placeholder="5" min="1" max="9"/>
+            <span class="inp-unit">ft</span>
+          </div>
+          <div class="inp-wrap">
+            <input type="number" id="hIn" placeholder="9" min="0" max="11"/>
+            <span class="inp-unit">in</span>
+          </div>
+        </div>
+        <div class="field-error" id="hErr"></div>
+      </div>
+
+      <!-- WEIGHT -->
+      <div class="field-group">
+        <div class="field-row">
+          <span class="field-label">Weight</span>
+          <div class="unit-switch" id="wUnitSwitch">
+            <button class="unit-opt active" data-u="kg">kg</button>
+            <button class="unit-opt" data-u="lbs">lbs</button>
+          </div>
+        </div>
+        <div class="inputs-row">
+          <div class="inp-wrap">
+            <input type="number" id="wVal" placeholder="70" min="10" max="500"/>
+            <span class="inp-unit" id="wUnitLabel">kg</span>
+          </div>
+        </div>
+        <div class="field-error" id="wErr"></div>
+      </div>
+
+      <!-- GENDER -->
+      <div class="field-group">
+        <div class="field-row">
+          <span class="field-label">Biological Sex <span style="color:var(--stone);font-weight:400;text-transform:none;letter-spacing:0">(optional)</span></span>
+        </div>
+        <div class="gender-row">
+          <button class="gender-opt active" data-g="–">–</button>
+          <button class="gender-opt" data-g="male">Male</button>
+          <button class="gender-opt" data-g="female">Female</button>
+        </div>
+      </div>
+
+      <!-- ACTIONS -->
+      <div class="action-row">
+        <button class="calc-btn" id="calcBtn">
+          Calculate BMI
+          <span class="calc-btn-arrow">→</span>
+        </button>
+        <button class="reset-btn" id="resetBtn" title="Reset">↺</button>
+      </div>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="card result-card" id="resultCard">
+
+      <!-- Empty state -->
+      <div class="result-empty" id="resEmpty">
+        <div class="empty-art">⚖</div>
+        <div class="empty-headline">Your result awaits</div>
+        <p class="empty-sub">Fill in your measurements and press Calculate to see your BMI score.</p>
+      </div>
+
+      <!-- Filled result -->
+      <div class="result-filled" id="resFilled">
+
+        <!-- Score row -->
+        <div class="bmi-display">
+          <div class="bmi-left">
+            <div class="bmi-eyebrow">Your BMI Score</div>
+            <div class="bmi-number" id="bmiNum">—</div>
+            <div class="bmi-badge" id="bmiBadge">—</div>
+          </div>
+          <div class="bmi-right">
+            <div class="ideal-label">Ideal Range</div>
+            <div class="ideal-range" id="idealRange">—</div>
+            <div class="ideal-unit" id="idealUnit">kg</div>
+          </div>
+        </div>
+
+        <!-- Scale bar -->
+        <div class="scale-wrap">
+          <div class="scale-track">
+            <div class="scale-seg s-under"  data-tip="Underweight: < 18.5"></div>
+            <div class="scale-seg s-normal" data-tip="Normal: 18.5 – 24.9"></div>
+            <div class="scale-seg s-over"   data-tip="Overweight: 25 – 29.9"></div>
+            <div class="scale-seg s-obese"  data-tip="Obese: 30 – 39.9"></div>
+            <div class="scale-seg s-eobese" data-tip="Severely Obese: ≥ 40"></div>
+            <div class="scale-pointer" id="scalePtr"></div>
+          </div>
+          <div class="scale-nums">
+            <span>10</span><span>18.5</span><span>25</span><span>30</span><span>40</span><span>50+</span>
+          </div>
+          <div class="scale-legend">
+            <div class="leg-item"><div class="leg-dot" style="background:var(--sky)"></div>Underweight</div>
+            <div class="leg-item"><div class="leg-dot" style="background:var(--sage)"></div>Normal</div>
+            <div class="leg-item"><div class="leg-dot" style="background:var(--amber)"></div>Overweight</div>
+            <div class="leg-item"><div class="leg-dot" style="background:var(--terracotta)"></div>Obese</div>
+            <div class="leg-item"><div class="leg-dot" style="background:var(--rose)"></div>Sev. Obese</div>
+          </div>
+        </div>
+
+        <!-- Health tips -->
+        <div class="tips-card">
+          <div class="tips-head">Wellness Insights</div>
+          <ul class="tips-list" id="tipsList"></ul>
+        </div>
+
+        <!-- Share -->
+        <button class="share-btn" id="shareBtn">
+          <span>⇪</span> Share Result
+        </button>
+
+      </div><!-- /result-filled -->
+
+    </div><!-- /result-card -->
+
+  </div><!-- /main-grid -->
+
+  <!-- ══ HISTORY ══ -->
+  <section class="history-section">
+    <div class="section-bar">
+      <h2 class="section-title">Your <em>History</em></h2>
+      <button class="clear-btn" id="clearBtn">Clear all</button>
+    </div>
+
+    <div class="history-grid" id="histGrid"></div>
+
+    <!-- Chart -->
+    <div class="card chart-card" id="chartCard" style="display:none">
+      <div class="chart-header">
+        <div>
+          <div class="chart-label">BMI Trend</div>
+          <div class="chart-sub">Your measurements over time</div>
+        </div>
+      </div>
+      <canvas id="bmiChart" height="110"></canvas>
+    </div>
+
+    <div class="history-empty" id="histEmpty">
+      <strong>No entries yet</strong>
+      Calculate your BMI to begin tracking your wellness journey.
+    </div>
+  </section>
+
+</div><!-- /page-wrap -->
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══════════════════════════════════════════
+   BODY HARMONY BMI CALCULATOR — app.js
+   ══════════════════════════════════════════ */
+
+/* ─── State ─── */
+const S = {
+  hUnit: 'cm',
+  wUnit: 'kg',
+  gender: '–',
+  live: false,
+  bmi: null,
+  prevBmi: 0,
+  history: [],
+};
+
+/* ─── DOM ─── */
+const el = (id) => document.getElementById(id);
+const themeBtn  = el('themeBtn');
+const voiceBtn  = el('voiceBtn');
+const liveToggle= el('liveToggle');
+const calcBtn   = el('calcBtn');
+const resetBtn  = el('resetBtn');
+const shareBtn  = el('shareBtn');
+const clearBtn  = el('clearBtn');
+
+const hUnitSwitch = el('hUnitSwitch');
+const wUnitSwitch = el('wUnitSwitch');
+const hCmRow = el('hCmRow');
+const hFtRow = el('hFtRow');
+
+const hCmIn = el('hCm');
+const hFtIn = el('hFt');
+const hInIn = el('hIn');
+const wValIn= el('wVal');
+
+const hErr = el('hErr');
+const wErr = el('wErr');
+
+const resEmpty  = el('resEmpty');
+const resFilled = el('resFilled');
+const bmiNum    = el('bmiNum');
+const bmiBadge  = el('bmiBadge');
+const scalePtr  = el('scalePtr');
+const idealRange= el('idealRange');
+const idealUnit = el('idealUnit');
+const tipsList  = el('tipsList');
+const histGrid  = el('histGrid');
+const histEmpty = el('histEmpty');
+const chartCard = el('chartCard');
+const bmiChart  = el('bmiChart');
+const toast     = el('toast');
+
+/* ─── Theme ─── */
+function initTheme() {
+  const saved = localStorage.getItem('bhi_theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+}
+themeBtn.addEventListener('click', () => {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const nxt = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', nxt);
+  localStorage.setItem('bhi_theme', nxt);
+  if (S.history.length > 1) setTimeout(drawChart, 50);
+});
+
+/* ─── Unit switchers ─── */
+hUnitSwitch.querySelectorAll('.unit-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    hUnitSwitch.querySelectorAll('.unit-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    S.hUnit = btn.dataset.u;
+    hCmRow.classList.toggle('hidden', S.hUnit !== 'cm');
+    hFtRow.classList.toggle('hidden', S.hUnit !== 'ft');
+    clearErr('h');
+    if (S.live) doCalc();
+  });
+});
+
+wUnitSwitch.querySelectorAll('.unit-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    wUnitSwitch.querySelectorAll('.unit-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    S.wUnit = btn.dataset.u;
+    el('wUnitLabel').textContent = S.wUnit;
+    clearErr('w');
+    if (S.live) doCalc();
+  });
+});
+
+/* ─── Gender ─── */
+document.querySelectorAll('.gender-opt').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gender-opt').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    S.gender = btn.dataset.g;
+    if (S.bmi) renderIdeal(getHeightCm());
+  });
+});
+
+/* ─── Live toggle ─── */
+liveToggle.addEventListener('change', () => {
+  S.live = liveToggle.checked;
+  if (S.live) doCalc();
+});
+
+[hCmIn, hFtIn, hInIn, wValIn].forEach(inp => {
+  inp.addEventListener('input', () => { if (S.live) doCalc(); });
+});
+
+/* ─── Calculate ─── */
+calcBtn.addEventListener('click', (e) => {
+  // Ripple
+  const ring = document.createElement('div');
+  ring.className = 'ripple-ring';
+  const r = calcBtn.getBoundingClientRect();
+  ring.style.left = (e.clientX - r.left) + 'px';
+  ring.style.top  = (e.clientY - r.top ) + 'px';
+  calcBtn.appendChild(ring);
+  setTimeout(() => ring.remove(), 600);
+
+  doCalc();
+});
+
+/* ─── Reset ─── */
+resetBtn.addEventListener('click', () => {
+  [hCmIn, hFtIn, hInIn, wValIn].forEach(i => { i.value = ''; i.classList.remove('err'); });
+  clearErr('h'); clearErr('w');
+  resEmpty.style.display = '';
+  resFilled.classList.remove('visible');
+  S.bmi = null; S.prevBmi = 0;
+  showToast('Cleared ✓');
+});
+
+/* ─── Share ─── */
+shareBtn.addEventListener('click', () => {
+  if (!S.bmi) return;
+  const cat = getCategory(S.bmi).label;
+  const text = `My BMI is ${S.bmi.toFixed(1)} — ${cat}. Tracked with Body Harmony Index.`;
+  navigator.clipboard.writeText(text).then(() => showToast('Result copied! ✓'));
+});
+
+/* ─── Clear history ─── */
+clearBtn.addEventListener('click', () => {
+  if (!S.history.length) return;
+  S.history = [];
+  savHistory();
+  renderHistory();
+  showToast('History cleared');
+});
+
+/* ══ CORE LOGIC ══ */
+
+function getHeightCm() {
+  if (S.hUnit === 'cm') {
+    return parseFloat(hCmIn.value) || null;
+  }
+  const ft = parseFloat(hFtIn.value) || 0;
+  const inch = parseFloat(hInIn.value) || 0;
+  const tot = ft * 30.48 + inch * 2.54;
+  return tot > 0 ? tot : null;
+}
+
+function getWeightKg() {
+  const v = parseFloat(wValIn.value);
+  if (!v || v <= 0) return null;
+  return S.wUnit === 'kg' ? v : v * 0.453592;
+}
+
+function validate(hCm, wKg) {
+  let ok = true;
+  clearErr('h'); clearErr('w');
+  if (!hCm) { setErr('h', 'Please enter your height.'); ok = false; }
+  else if (hCm < 50 || hCm > 280) { setErr('h', 'Height must be between 50–280 cm.'); ok = false; }
+  if (!wKg) { setErr('w', 'Please enter your weight.'); ok = false; }
+  else if (wKg < 10 || wKg > 500) { setErr('w', 'Weight must be between 10–500 kg.'); ok = false; }
+  return ok;
+}
+
+function doCalc() {
+  const hCm = getHeightCm();
+  const wKg = getWeightKg();
+  if (!validate(hCm, wKg)) return;
+  const hM = hCm / 100;
+  const bmi = wKg / (hM * hM);
+  S.bmi = bmi;
+  renderResult(bmi, hCm, wKg);
+  addHistory(bmi, wKg);
+}
+
+/* ══ CATEGORIES ══ */
+const CATS = [
+  { max: 18.5, label: 'Underweight',  cls: 'c-under',   badge: 'badge-under',   pct: [0, 25]     },
+  { max: 25,   label: 'Normal',       cls: 'c-normal',   badge: 'badge-normal',  pct: [25, 50]    },
+  { max: 30,   label: 'Overweight',   cls: 'c-over',     badge: 'badge-over',    pct: [50, 66.6]  },
+  { max: 40,   label: 'Obese',        cls: 'c-obese',    badge: 'badge-obese',   pct: [66.6, 83.3]},
+  { max: Infinity, label: 'Sev. Obese', cls: 'c-e-obese',badge: 'badge-e-obese', pct: [83.3, 100] },
+];
+
+function getCategory(bmi) {
+  return CATS.find(c => bmi < c.max) || CATS[CATS.length - 1];
+}
+
+function bmiToPct(bmi) {
+  // Map BMI 10–50 → 0–100%
+  const MIN = 10, MAX = 50;
+  return Math.min(Math.max((bmi - MIN) / (MAX - MIN) * 100, 1), 99);
+}
+
+/* ══ HEALTH TIPS ══ */
+const TIPS = {
+  under: [
+    'Include nutrient-dense foods: avocados, nuts, whole grains, and quality proteins.',
+    'Incorporate progressive strength training to build lean muscle tissue.',
+    'Eat regularly — 4–6 smaller meals spaced throughout the day can help.',
+    'Consult a registered dietitian if weight loss has been unintentional.',
+  ],
+  normal: [
+    'Celebrate — you\'re in a healthy range! Consistency is your best friend now.',
+    'Aim for 150+ minutes of moderate aerobic activity per week.',
+    'Prioritise quality sleep (7–9 hrs) — it regulates hunger hormones.',
+    'Annual wellness check-ups help you stay on track long-term.',
+  ],
+  over: [
+    'A 300–500 kcal daily reduction creates sustainable, steady fat loss.',
+    'Daily walks of 30+ minutes are a powerful, low-barrier starting point.',
+    'Swap ultra-processed foods for whole, single-ingredient alternatives.',
+    'Track your meals for 2 weeks — awareness often drives change.',
+  ],
+  obese: [
+    'Speaking with your GP is the most impactful first step you can take.',
+    'Low-impact activity (swimming, cycling, yoga) protects joints while burning energy.',
+    'Focus on behaviour-based goals rather than purely the scale.',
+    'Even a 5–10% weight reduction significantly improves metabolic health.',
+  ],
+  eobese: [
+    'Please consult a healthcare professional for a medically supervised plan.',
+    'Bariatric support groups and specialist dietitians can provide structured help.',
+    'Mental health support is an important, often overlooked, pillar of wellness.',
+    'Celebrate every improvement — non-scale victories matter enormously.',
+  ],
+};
+
+function getTips(bmi) {
+  if (bmi < 18.5) return TIPS.under;
+  if (bmi < 25)   return TIPS.normal;
+  if (bmi < 30)   return TIPS.over;
+  if (bmi < 40)   return TIPS.obese;
+  return TIPS.eobese;
+}
+
+/* ══ RENDER RESULT ══ */
+function renderResult(bmi, hCm, wKg) {
+  const cat = getCategory(bmi);
+
+  // Show filled
+  resEmpty.style.display = 'none';
+  resFilled.classList.remove('visible');
+  void resFilled.offsetWidth; // reflow for re-animation
+  resFilled.classList.add('visible');
+
+  // BMI number animation
+  animCount(bmiNum, S.prevBmi, bmi, 700);
+  S.prevBmi = bmi;
+
+  // Badge
+  bmiBadge.textContent = cat.label;
+  bmiBadge.className = 'bmi-badge ' + cat.badge;
+  bmiNum.className = 'bmi-number ' + cat.cls;
+
+  // Scale pointer
+  setTimeout(() => { scalePtr.style.left = bmiToPct(bmi) + '%'; }, 80);
+
+  // Pointer colour matches category
+  const colMap = { 'c-under':'var(--sky)','c-normal':'var(--sage)','c-over':'var(--amber)','c-obese':'var(--terracotta)','c-e-obese':'var(--rose)' };
+  scalePtr.style.borderColor = colMap[cat.cls] || 'var(--ink)';
+  scalePtr.style.setProperty('--ptr-clr', colMap[cat.cls] || 'var(--ink)');
+
+  // Ideal weight
+  renderIdeal(hCm);
+
+  // Tips
+  tipsList.innerHTML = getTips(bmi).map(t => `<li>${t}</li>`).join('');
+}
+
+function renderIdeal(hCm) {
+  if (!hCm) return;
+  const hM = hCm / 100;
+  let lo = 18.5 * hM * hM;
+  let hi = 24.9 * hM * hM;
+  if (S.wUnit === 'lbs') { lo *= 2.20462; hi *= 2.20462; }
+  idealRange.textContent = `${lo.toFixed(1)} – ${hi.toFixed(1)}`;
+  idealUnit.textContent = S.wUnit;
+}
+
+/* ══ COUNT ANIMATION ══ */
+function animCount(el, from, to, ms) {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now - start) / ms, 1);
+    const ease = 1 - Math.pow(1 - t, 3);
+    el.textContent = (from + (to - from) * ease).toFixed(1);
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+/* ══ HISTORY ══ */
+function addHistory(bmi, wKg) {
+  const cat = getCategory(bmi);
+  const entry = {
+    bmi: +bmi.toFixed(1),
+    w: +(S.wUnit === 'kg' ? wKg : wKg * 2.20462).toFixed(1),
+    wUnit: S.wUnit,
+    cat: cat.label,
+    cls: cat.cls,
+    date: new Date().toLocaleString('en-GB', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' }),
+    ts: Date.now(),
+  };
+  // Deduplicate within 5s
+  const last = S.history[S.history.length - 1];
+  if (last && last.bmi === entry.bmi && Date.now() - last.ts < 5000) return;
+  S.history.push(entry);
+  if (S.history.length > 15) S.history.shift();
+  savHistory();
+  renderHistory();
+}
+
+function savHistory() { localStorage.setItem('bhi_history', JSON.stringify(S.history)); }
+
+function loadHistory() {
+  try { S.history = JSON.parse(localStorage.getItem('bhi_history') || '[]'); } catch(e) { S.history = []; }
+}
+
+function renderHistory() {
+  histGrid.innerHTML = '';
+  if (!S.history.length) {
+    histEmpty.style.display = 'block';
+    chartCard.style.display = 'none';
+    return;
+  }
+  histEmpty.style.display = 'none';
+  chartCard.style.display = 'block';
+
+  [...S.history].reverse().forEach(e => {
+    const div = document.createElement('div');
+    div.className = 'hist-item';
+    div.innerHTML = `
+      <div class="hist-date">${e.date}</div>
+      <div class="hist-bmi ${e.cls}">${e.bmi}</div>
+      <div class="hist-cat ${e.cls}">${e.cat}</div>
+    `;
+    histGrid.appendChild(div);
+  });
+
+  drawChart();
+}
+
+/* ══ CHART ══ */
+function drawChart() {
+  const canvas = bmiChart;
+  const ctx = canvas.getContext('2d');
+  const data = S.history.map(e => e.bmi);
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth || 600;
+  const h = 110;
+  canvas.width  = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width  = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.scale(dpr, dpr);
+  ctx.clearRect(0, 0, w, h);
+
+  if (!data.length) return;
+
+  const pl = 10, pr = 10, pt = 18, pb = 22;
+  const cw = w - pl - pr;
+  const ch = h - pt - pb;
+
+  const minV = Math.max(Math.min(...data) - 3, 10);
+  const maxV = Math.min(Math.max(...data) + 3, 50);
+
+  const xOf = (i) => pl + (i / (data.length - 1 || 1)) * cw;
+  const yOf = (v) => pt + (1 - (v - minV) / (maxV - minV)) * ch;
+
+  // Zone lines
+  const zoneClrs = isDark
+    ? { n18:'rgba(74,127,165,0.4)', n25:'rgba(107,143,110,0.4)', n30:'rgba(201,149,42,0.4)' }
+    : { n18:'rgba(74,127,165,0.3)', n25:'rgba(107,143,110,0.3)', n30:'rgba(201,149,42,0.3)' };
+
+  [[18.5, zoneClrs.n18], [25, zoneClrs.n25], [30, zoneClrs.n30]].forEach(([v, clr]) => {
+    if (v < minV || v > maxV) return;
+    ctx.strokeStyle = clr;
+    ctx.lineWidth = 1;
+    ctx.setLineDash([5, 4]);
+    ctx.beginPath();
+    ctx.moveTo(pl, yOf(v));
+    ctx.lineTo(w - pr, yOf(v));
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Zone label
+    ctx.fillStyle = clr.replace('0.4)','0.9)').replace('0.3)','0.8)');
+    ctx.font = `500 9px Outfit, sans-serif`;
+    ctx.textAlign = 'right';
+    ctx.fillText(v, w - pr - 2, yOf(v) - 3);
+  });
+
+  if (data.length === 1) {
+    // Single point
+    ctx.beginPath();
+    ctx.arc(xOf(0), yOf(data[0]), 5, 0, Math.PI*2);
+    ctx.fillStyle = isDark ? '#e0845c' : '#c9704a';
+    ctx.fill();
+    ctx.fillStyle = isDark ? '#9e9080' : '#6b6058';
+    ctx.font = '10px Outfit, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(data[0].toFixed(1), xOf(0), yOf(data[0]) - 10);
+    return;
+  }
+
+  // Gradient fill
+  const grad = ctx.createLinearGradient(0, pt, 0, h - pb);
+  if (isDark) {
+    grad.addColorStop(0, 'rgba(224,132,92,0.25)');
+    grad.addColorStop(1, 'rgba(224,132,92,0)');
+  } else {
+    grad.addColorStop(0, 'rgba(201,112,74,0.18)');
+    grad.addColorStop(1, 'rgba(201,112,74,0)');
+  }
+
+  // Fill path
+  ctx.beginPath();
+  ctx.moveTo(xOf(0), yOf(data[0]));
+  for (let i = 1; i < data.length; i++) {
+    const cx = (xOf(i-1) + xOf(i)) / 2;
+    ctx.bezierCurveTo(cx, yOf(data[i-1]), cx, yOf(data[i]), xOf(i), yOf(data[i]));
+  }
+  ctx.lineTo(xOf(data.length-1), h - pb);
+  ctx.lineTo(xOf(0), h - pb);
+  ctx.closePath();
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.moveTo(xOf(0), yOf(data[0]));
+  for (let i = 1; i < data.length; i++) {
+    const cx = (xOf(i-1) + xOf(i)) / 2;
+    ctx.bezierCurveTo(cx, yOf(data[i-1]), cx, yOf(data[i]), xOf(i), yOf(data[i]));
+  }
+  ctx.strokeStyle = isDark ? '#e0845c' : '#c9704a';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Dots
+  data.forEach((v, i) => {
+    ctx.beginPath();
+    ctx.arc(xOf(i), yOf(v), 4.5, 0, Math.PI*2);
+    ctx.fillStyle = isDark ? '#e0845c' : '#c9704a';
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(xOf(i), yOf(v), 2.5, 0, Math.PI*2);
+    ctx.fillStyle = isDark ? '#1c1914' : '#ffffff';
+    ctx.fill();
+  });
+
+  // Latest label
+  const li = data.length - 1;
+  ctx.fillStyle = isDark ? '#e0845c' : '#c9704a';
+  ctx.font = 'bold 10px Outfit, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(data[li].toFixed(1), xOf(li), yOf(data[li]) - 10);
+}
+
+window.addEventListener('resize', () => { if (S.history.length > 1) drawChart(); });
+
+/* ══ ERROR HELPERS ══ */
+function setErr(which, msg) {
+  if (which === 'h') {
+    hErr.textContent = msg;
+    if (S.hUnit === 'cm') hCmIn.classList.add('err');
+    else { hFtIn.classList.add('err'); hInIn.classList.add('err'); }
+  } else {
+    wErr.textContent = msg;
+    wValIn.classList.add('err');
+  }
+}
+function clearErr(which) {
+  if (which === 'h') {
+    hErr.textContent = '';
+    hCmIn.classList.remove('err'); hFtIn.classList.remove('err'); hInIn.classList.remove('err');
+  } else {
+    wErr.textContent = '';
+    wValIn.classList.remove('err');
+  }
+}
+
+/* ══ TOAST ══ */
+let toastT;
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+/* ══ VOICE INPUT ══ */
+(function initVoice() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { voiceBtn.style.display = 'none'; return; }
+
+  const rec = new SR();
+  rec.continuous = false;
+  rec.lang = 'en-US';
+  let listening = false;
+
+  voiceBtn.addEventListener('click', () => {
+    if (listening) { rec.stop(); return; }
+    rec.start();
+    listening = true;
+    voiceBtn.classList.add('listening');
+    showToast('🎙 Listening… say "height 175 weight 70"');
+  });
+
+  rec.onresult = (e) => {
+    const t = e.results[0][0].transcript.toLowerCase();
+    // Parse height
+    const hMatch = t.match(/height\s+(\d+(?:\.\d+)?)/);
+    const wMatch = t.match(/weight\s+(\d+(?:\.\d+)?)/);
+    if (hMatch) { hCmIn.value = hMatch[1]; }
+    if (wMatch) { wValIn.value = wMatch[1]; }
+    if (hMatch || wMatch) showToast(`Heard: ${t}`);
+    else showToast('Could not parse. Try: "height 175 weight 70"');
+  };
+
+  rec.onend = () => {
+    listening = false;
+    voiceBtn.classList.remove('listening');
+  };
+
+  rec.onerror = () => {
+    listening = false;
+    voiceBtn.classList.remove('listening');
+    showToast('Voice input unavailable');
+  };
+})();
+
+/* ══ HISTORY ITEM COLOR FIX ══ */
+function patchHistColors() {
+  const map = {
+    'c-under':  'var(--sky)',
+    'c-normal': 'var(--sage)',
+    'c-over':   'var(--amber)',
+    'c-obese':  'var(--terracotta)',
+    'c-e-obese':'var(--rose)',
+  };
+  document.querySelectorAll('.hist-bmi, .hist-cat').forEach(el => {
+    const cls = [...el.classList].find(c => c.startsWith('c-'));
+    if (cls) el.style.color = map[cls] || '';
+  });
+}
+new MutationObserver(patchHistColors).observe(histGrid, { childList: true, subtree: true });
+
+/* ══ INIT ══ */
+initTheme();
+loadHistory();
+renderHistory();
+</script>
+</body>
+</html>
